@@ -2,7 +2,7 @@ import pygame,sys,random
 from pygame.math import Vector2
 import mysql.connector
 
-conn = mysql.connector.connect(host = "localhost",username = "root",password = "chhering123465", database = "score")
+conn = mysql.connector.connect(host = "",username = "",password = "", database = "")
 my_cursor = conn.cursor()
 
 
@@ -15,7 +15,7 @@ if not my_cursor.fetchone():
 
 try:
 	sql = "INSERT INTO player_values (name, score) VALUES (%s, %s);"
-	val = (player_name,9 )
+	val = (player_name, self.score_text )
 	my_cursor.execute(sql, val)
 	conn.commit()
 	print("Record inserted successfully.")
@@ -181,8 +181,7 @@ class MAIN:
 						pygame.draw.rect(screen,grass_color,grass_rect)			
 
 	def draw_score(self):
-		score_text = str(len(self.snake.body) - 3)
-		sc = score_text
+		self.score_text = str(len(self.snake.body) - 3)
 		score_surface = game_font.render(score_text,True,(56,74,12))
 		score_x = int(cell_size * cell_number - 60)
 		score_y = int(cell_size * cell_number - 40)
